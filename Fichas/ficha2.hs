@@ -40,4 +40,40 @@ move' (x,y) Oeste  d = (max (x - 1) 0, y)
 -- 3 
 
 infAsup :: Ponto -> Double -> Ponto 
-infAsup (x,y) l = (x,l + y)  
+infAsup (x,y) l = (x, l + y)  
+
+-- 4
+
+infAcent :: Ponto -> Double -> Ponto 
+infAcent (x,y) l = (x + l/2, y + l/2)
+
+-- 5
+
+type Velocidade = Double
+
+type Tempo = Double
+
+moveVelox :: Ponto -> Velocidade -> Tempo -> Ponto
+moveVelox (x,y) v t = (x + v * t, y)   
+
+-- 6 
+
+moveVeloy :: Ponto -> Velocidade -> Tempo -> Ponto
+moveVeloy (x,y) v t = (x , y + v * t) 
+
+-- 7 
+
+type Velocidade' = (Double, Double)
+
+moveVeloxy :: Ponto -> Velocidade' -> Tempo -> Ponto
+moveVeloxy (x,y) (vx,vy) t = (x + vx * t, y + vy * t) 
+
+-- 8
+
+data Figura =
+             |Circulo Ponto Double 
+             |Rectangulo Ponto Ponto 
+             |Quadrado Ponto Double 
+             deriving (Show,Eq)
+
+--  a) 
