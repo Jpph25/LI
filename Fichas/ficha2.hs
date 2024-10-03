@@ -107,13 +107,14 @@ menorQuadrado (Quadrado (xq,yq) l)
 --  c)
 maiorCirculo :: Figura -> Figura
 maiorCirculo (Quadrado (xq,yq) l) 
-              = (Circulo (xq + l/2, yq + l/2) 
-                (sqrt ((xq - xq + l/2 )^2 + (yq - yq + l/2)^2)))  
+           = (Circulo (xq + l/2, yq + l/2) 
+             (sqrt ((xq - xq + l/2 )^2 + (yq - yq + l/2)^2)))  
 maiorCirculo (Rectangulo (xr1,yr1) (xr2,yr2)) 
-              = (Circulo ((xr1 + xr2)/2, (yr1+yr2)/2)
-                (sqrt ((min xr1 xr2) - (xr1 + xr2)/2) +  ((max yr1 yr2) - (yr1 + yr2)/2)))
+           = (Circulo ((xr1 + xr2)/2, (yr1+yr2)/2)
+             (sqrt ((min xr1 xr2) - (xr1 + xr2)/2) 
+           + ((max yr1 yr2) - (yr1 + yr2)/2)))
 maiorCirculo (Circulo (xc,yc) r)  
-              = (Circulo (xc,yc) r) 
+           = (Circulo (xc,yc) r) 
 
 -- d)   
 contida :: Figura -> Figura -> Bool
@@ -126,9 +127,9 @@ contida (Quadrado (xq1,yq1) l1) (Quadrado (xq2,yq2) l2)
            then True
            else False  
 contida (Rectangulo (xr11,yr11) (xr12,yr12)) (Rectangulo (xr21,yr21) (xr22,yr22))
-         = if (    (min xr12 xr11) >= (min xr21 xr22) 
+         = if (     (min xr12 xr11) >= (min xr21 xr22) 
                  && (min yr12 yr11) >= (min yr21 yr22)
-                && (max xr12 xr11) <= (max xr21 xr22) 
+                 && (max xr12 xr11) <= (max xr21 xr22) 
                  && (max yr12 yr11) <= (max yr21 yr22))   
            then True
            else False                           
