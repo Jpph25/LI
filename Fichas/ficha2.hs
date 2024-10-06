@@ -1,135 +1,173 @@
--- Ficha 2 
+--   // FICHA 2 \\
 
--- 1 
+-- 1. 
 
-data Movimento = Norte 
-               | Sul 
-               | Este 
-               | Oeste 
+data Movement =  North 
+               | South 
+               | East 
+               | West  
                deriving Show
 
-type Ponto = (Double,Double) 
+type Point = (Double,Double) 
 
---  a)
-move :: Ponto -> Movimento -> Ponto 
-move (x,y) Norte = (x, y + 1) 
-move (x,y) Sul   = (x, y - 1)
-move (x,y) Este  = (x + 1, y)
-move (x,y) Oeste = (x - 1, y)   
+--   a)
+-- Calculates the coordinates of the point after a movement
+move :: Point -> Movement -> Point 
+move (x,y) North 
+    = (x, y + 1) 
+move (x,y) South 
+    = (x, y - 1)
+move (x,y) East  
+    = (x + 1, y)
+move (x,y) West  
+    = (x - 1, y)   
 
---  b) 
-dist2p :: Ponto -> Ponto -> Double
-dist2p (x1,y1) (x2,y2) = sqrt ((x1 - x2)^2 + (y1 - y2)^2) 
+--   b) 
+-- Calculates the distance between two points
+dist2p :: Point -> Point -> Double
+dist2p (x1,y1) (x2,y2) 
+      = sqrt ((x1 - x2)^2 + (y1 - y2)^2) 
 
---  c) 
-pointS :: Ponto -> Ponto -> Ponto 
-pointS (x1,y1) (x2,y2) = if   y1 == y2 
-                         then (x2,y2) 
-                         else if   y1 > y2 
-                              then (x1,y1)
-                              else (x2,y2)    
+--   c)
+-- Calculates wich point is more to the south 
+-- If its the same gives the first point    
+pointS :: Point -> Point -> Point 
+pointS (x1,y1) (x2,y2) 
+      | y1 == y2 = (x1,y1)
+      | y1 >  y2 = (x1,y1)
+      | y1 <  y2 = (x2,y2)  
 
--- 2
 
-move' :: Ponto -> Movimento -> Double -> Ponto 
-move' (x,y) Norte  d = (x, min (y + 1) d) 
-move' (x,y) Sul    d = (x, max (y - 1) 0) 
-move' (x,y) Este   d = (min (x + 1) d, y)
-move' (x,y) Oeste  d = (max (x - 1) 0, y)   
+-- 2. 
+-- Calculates the coordinates of the point after a movement
+-- Making sure it dosent leave the window
+move' :: Point -> Movement -> Double -> Point 
+move' (x,y) North d 
+     = (x, min (y + 1) d) 
+move' (x,y) South d 
+     = (x, max (y - 1) 0) 
+move' (x,y) East  d 
+     = (min (x + 1) d, y)
+move' (x,y) West  d 
+     = (max (x - 1) 0, y)   
 
--- 3 
 
-infAsup :: Ponto -> Double -> Ponto 
-infAsup (x,y) l = (x, l + y)  
+-- 3. 
+-- Calculates the coordinates of a point in case the origin was the topleft conner 
+infAsup :: Point -> Double -> Point  
+infAsup (x,y) l 
+       = (x, l + y)  
 
--- 4
 
-infAcent :: Ponto -> Double -> Ponto 
-infAcent (x,y) l = (x + l/2, y + l/2)
+-- 4.
+-- Calculates the coordinates of a point in case the origin was the center 
+infAcent :: Point -> Double -> Point  
+infAcent (x,y) l 
+        = (x + l/2, y + l/2)
 
--- 5
 
-type Velocidade = Double
+-- 5.
 
-type Tempo = Double
+type Speed = Double
 
-moveVelox :: Ponto -> Velocidade -> Tempo -> Ponto
-moveVelox (x,y) v t = (x + v * t, y)   
+type Time  = Double
 
--- 6 
+-- Calculates the coordinates of a point after moving horizontaly 
+-- in a constante speed in a given time
+moveSpedx :: Point -> Speed -> Time -> Point
+moveSpedx (x,y) v t 
+         = (x + v * t, y)   
 
-moveVeloy :: Ponto -> Velocidade -> Tempo -> Ponto
-moveVeloy (x,y) v t = (x , y + v * t) 
 
--- 7 
+-- 6.  
+-- Calculates the coordinates of a point after moving verticaly 
+-- in a constante speed in a given time
+moveSpedy :: Point -> Speed -> Time -> Point
+moveSpedy (x,y) v t 
+         = (x , y + v * t) 
 
-type Velocidade' = (Double, Double)
 
-moveVeloxy :: Ponto -> Velocidade' -> Tempo -> Ponto
-moveVeloxy (x,y) (vx,vy) t = (x + vx * t, y + vy * t) 
+-- 7. 
+-- Calculates the coordinates of a point after moving in a constante speed in a given time
+type Speed' = (Double, Double)
+
+moveSpedxy :: Point -> Speed' -> Time -> Point
+moveSpedxy (x,y) (vx,vy) t 
+          = (x + vx * t, y + vy * t) 
 
 -- 8
 
-data Figura =
-             Circulo Ponto Double   |
-             Rectangulo Ponto Ponto | 
-             Quadrado Ponto Double 
+data Figure = Circle    Point Double   |
+              Rectangle Point Point    | 
+              Square    Point Double 
              deriving (Show,Eq)
 
---  a) 
-inFig :: Figura -> Ponto -> String 
-inFig (Circulo (xc,yc) r) (x1,y1) = if   sqrt ((xc - x1)^2 + (yc - y1)^2) > r
-                                    then "O ponto não pertence a figura"
-                                    else "O ponto pertence a figura" 
-inFig (Rectangulo (xr1,yr1) (xr2,yr2)) (x2,y2)
-                                              | x2 > min xr1 xr2 || x2 < max xr1 xr2 
-                                               = "O ponto não pertence a figura"  
-                                              | y2 > min yr1 yr2 || y2 < max yr1 yr2 
-                                               = "O ponto não pertence a figura"    
-                                              | otherwise = "O ponto pertence a figura"
-inFig (Quadrado (xq,yq) l) (x3,y3) 
-                                  | x3 > (xq + l) || x3 < xq  
-                                   = "O ponto não pertence a figura"  
-                                  | y3 > (yq + l) || y3 < yq  
-                                   = "O ponto não pertence a figura"    
-                                  | otherwise = "O ponto pertence a figura" 
+--   a) 
+-- Verifies if a given point is inside a figure
+inFig :: Figure -> Point -> String 
+inFig (Circle (xc,yc) r) (x1,y1) 
+     = if   sqrt ((xc - x1)^2 + (yc - y1)^2) > r
+       then "The point dose not belong in the figure"
+       else "The point belonges in the figure" 
+inFig (Rectangle (xr1,yr1) (xr2,yr2)) (x2,y2) 
+     | x2 > min xr1 xr2 || x2 < max xr1 xr2 
+      = "The point dose not belong in the figure"  
+     | y2 > min yr1 yr2 || y2 < max yr1 yr2 
+      = "The point dose not belong in the figure"    
+     | otherwise = "The point belonges in the figure" 
+inFig (Square (xq,yq) l) (x3,y3) 
+     | x3 > (xq + l) || x3 < xq  
+      = "The point dose not belong in the figure"  
+     | y3 > (yq + l) || y3 < yq  
+      = "The point dose not belong in the figure"    
+     | otherwise = "The point belonges in the figure"  
 
---  b) 
-menorQuadrado :: Figura -> Figura 
-menorQuadrado (Circulo (xc,yc) r) 
-               = (Quadrado (xc- r, yc - r) (2 * r)) 
-menorQuadrado (Rectangulo (xr1,yr1) (xr2,yr2)) 
-               = (Quadrado (min xr1 xr2, max yr1 yr2) 
-                 (max (abs (xr1 - xr2)) (abs (yr1-yr2)))) 
-menorQuadrado (Quadrado (xq,yq) l)  
-               = (Quadrado (xq,yq) l)  
+--   b)
+-- Calculates the samller square that contains a given figure 
+smallSquare :: Figure -> Figure 
+smallSquare  (Circle (xc,yc) r) 
+           = (Square (xc- r, yc - r) (2 * r))
 
---  c)
-maiorCirculo :: Figura -> Figura
-maiorCirculo (Quadrado (xq,yq) l) 
-           = (Circulo (xq + l/2, yq + l/2) 
-             (sqrt ((xq - xq + l/2 )^2 + (yq - yq + l/2)^2)))  
-maiorCirculo (Rectangulo (xr1,yr1) (xr2,yr2)) 
-           = (Circulo ((xr1 + xr2)/2, (yr1+yr2)/2)
-             (sqrt ((min xr1 xr2) - (xr1 + xr2)/2) 
-           + ((max yr1 yr2) - (yr1 + yr2)/2)))
-maiorCirculo (Circulo (xc,yc) r)  
-           = (Circulo (xc,yc) r) 
+smallSquare  (Rectangle (xr1,yr1) (xr2,yr2)) 
+           = (Square (min xr1 xr2, max yr1 yr2) 
+              (max (abs (xr1 - xr2)) (abs (yr1-yr2)))) 
 
--- d)   
-contida :: Figura -> Figura -> Bool
-contida (Circulo (xc1,yc1) r1) (Circulo (xc2,yc2) r2) 
-         = if   (sqrt ((xc1 - xc2)^2 + (yc1 - yc2)^2) + r1) <= r2
-           then True
-           else False  
-contida (Quadrado (xq1,yq1) l1) (Quadrado (xq2,yq2) l2)
-         = if   (sqrt ((xq1 - xq2)^2 + (yq1 - yq2)^2) + l1 * sqrt 2) <= l2 * sqrt 2 
-           then True
-           else False  
-contida (Rectangulo (xr11,yr11) (xr12,yr12)) (Rectangulo (xr21,yr21) (xr22,yr22))
-         = if (     (min xr12 xr11) >= (min xr21 xr22) 
-                 && (min yr12 yr11) >= (min yr21 yr22)
-                 && (max xr12 xr11) <= (max xr21 xr22) 
-                 && (max yr12 yr11) <= (max yr21 yr22))   
-           then True
-           else False                           
+smallSquare  (Square (xq,yq) l)  
+           = (Square (xq,yq) l)  
+
+--   c)
+-- Calculate the bigger circle contained inside the figure
+bigCircle :: Figure -> Figure
+bigCircle (Square (xq,yq) l) 
+         = let xc = xq + l/2
+               yc = yq + l/2
+               r  = l/2   
+           in (Circle (xc,yc) r) 
+
+bigCircle (Rectangle (xr1,yr1) (xr2,yr2))
+         = let xc = (xr1 + xr2)/2 
+               yc = (yr1 + yr2)/2 
+               r  = min ((abs (xr1 - xr2))/2) ((abs (yr1 -yr2))/2) 
+           in (Circle (xc,yc) r) 
+
+bigCircle  (Circle (xc,yc) r)
+         = (Circle (xc,yc) r) 
+
+--   d)
+-- Verifies if the first figure is contained in the second   
+containedI :: Figure -> Figure -> Bool 
+containedI (Circle (xc1,yc1) r1) (Circle (xc2,yc2) r2)
+          = let d = sqrt ((xc1 - xc2)^2 + (yc1 - yc2)^2)
+            in (d + r1) <= r2 
+
+containedI (Square (xq1,yq1) l1) (Square (xq2,yq2) l2)             
+          = let xtd = xq1 + l1 * sqrt 2 
+                ytd = yq1 + l1 * sqrt 2 
+                d   = sqrt ((xq2 - xtd)^2 + (yq2 - ytd)^2) 
+            in  d  <= l2 * sqrt 2  
+
+comtainedI (Rectangle (xr11,yr11) (xr12,yr12)) (Rectangle (xr21,yr21) (xr22,yr22))
+          =    (min xr12 xr11) >= (min xr21 xr22) 
+            && (min yr12 yr11) >= (min yr21 yr22)
+            && (max xr12 xr11) <= (max xr21 xr22) 
+            && (max yr12 yr11) <= (max yr21 yr22) 
