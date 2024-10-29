@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>Ficha3</title><link href="linuwial.css" rel="stylesheet" type="text/css" title="Linuwial" /><link rel="stylesheet" type="text/css" href="quick-jump.css" /><script src="haddock-bundle.min.js" async="async" type="text/javascript"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { processClass: "mathjax", ignoreClass: ".*" } });</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script></head><body><div id="package-header"><span class="caption empty">&nbsp;</span><ul class="links" id="page-menu"><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul></div><div id="content"><div id="module-header"><table class="info"><tr><th valign="top">Copyright</th><td>(c) Jo&#227;o &lt;a110587@uminho.pt&gt; 2024</td></tr><tr><th>Maintainer</th><td>a110587@uminho.pt</td></tr><tr><th>Safe Haskell</th><td>Safe</td></tr></table><p class="caption">Ficha3</p></div><div id="description"><p class="caption">Description</p><div class="doc"><p>This module contains Haskell definitions to calculate simple recursive 
+function</p></div></div><div id="synopsis"><details id="syn"><summary>Synopsis</summary><ul class="details-toggle" data-details-id="syn"><li class="src short"><a href="#v:rembls">rembls</a> :: [String] -&gt; Char -&gt; [String]</li><li class="src short"><a href="#v:addFst">addFst</a> :: [(Int, Int)] -&gt; Int -&gt; [(Int, Int)]</li><li class="src short"><a href="#v:bgg2">bgg2</a> :: [(Int, Int)] -&gt; Int</li><li class="src short"><span class="keyword">type</span> <a href="#t:Name">Name</a> = String</li><li class="src short"><span class="keyword">type</span> <a href="#t:Coordinate">Coordinate</a> = (Double, Double)</li><li class="src short"><span class="keyword">data</span> <a href="#t:Movement">Movement</a><ul class="subs"><li>= <a href="#v:N">N</a></li><li>| <a href="#v:S">S</a></li><li>| <a href="#v:E">E</a></li><li>| <a href="#v:W">W</a></li></ul></li><li class="src short"><span class="keyword">type</span> <a href="#t:Movements">Movements</a> = [<a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a>]</li><li class="src short"><span class="keyword">data</span> <a href="#t:PositionPersson">PositionPersson</a> = <a href="#v:Pos">Pos</a> <a href="Ficha3.html#t:Name" title="Ficha3">Name</a> <a href="Ficha3.html#t:Coordinate" title="Ficha3">Coordinate</a></li><li class="src short"><a href="#v:positonM">positonM</a> :: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>] -&gt; <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</li><li class="src short"><a href="#v:multPstn">multPstn</a> :: <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; <a href="Ficha3.html#t:Movements" title="Ficha3">Movements</a> -&gt; <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></li><li class="src short"><a href="#v:multPstnM">multPstnM</a> :: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>] -&gt; <a href="Ficha3.html#t:Movements" title="Ficha3">Movements</a> -&gt; [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</li><li class="src short"><a href="#v:personN">personN</a> :: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>] -&gt; Maybe <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></li><li class="src short"><a href="#v:peopleN">peopleN</a> :: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>] -&gt; [<a href="Ficha3.html#t:Name" title="Ficha3">Name</a>]</li><li class="src short"><a href="#v:ntoRight">ntoRight</a> :: [a] -&gt; Int -&gt; [a]</li></ul></details></div><div id="interface"><h1>Documentation</h1><div class="top"><p class="src"><a id="v:rembls" class="def">rembls</a> <a href="#v:rembls" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [String]</td><td class="doc"><p>List of words  </p></td></tr><tr><td class="src">-&gt; Char</td><td class="doc"><p>Charcter of reference </p></td></tr><tr><td class="src">-&gt; [String]</td><td class="doc"><p>New list </p></td></tr></table></div><div class="doc"><p>This function removes all words from a list that starts with a given character </p><pre>rembls  [] _ 
+      = [] 
+rembls (h:t) a 
+      | head h == a = rembls t a   
+      | otherwise 
+       = h : rembls t 
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:rembls0">Notes:</h2><details id="ch:rembls0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the given list is empty, gives back an empty list</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:rembls1">Exemples:</h2><details id="ch:rembls1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>rembls  [&quot;Jo&#227;o&quot;,&quot;Catarina&quot;] 'C'
+</code></strong>[&quot;Jo&#227;o&quot;] 
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>rembls [] 'J'
+</code></strong>[]
+</pre></details></div></div><div class="top"><p class="src"><a id="v:addFst" class="def">addFst</a> <a href="#v:addFst" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [(Int, Int)]</td><td class="doc"><p>List of pairs  </p></td></tr><tr><td class="src">-&gt; Int</td><td class="doc"><p>Number to add in the fisrt element of all pairs of the list</p></td></tr><tr><td class="src">-&gt; [(Int, Int)]</td><td class="doc"><p>New List </p></td></tr></table></div><div class="doc"><p>This function adds a given nunber to all the first elements of the pairs in a list of pairs</p><pre>addFst  [] _ 
+      = []
+addFst ((x,y):t) z 
+      = (x + z, y) : addFst t z 
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:addFst0">Notes:</h2><details id="ch:addFst0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list is empty gives back an empty list</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:addFst1">Exemples:</h2><details id="ch:addFst1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[(0,1),(1,2)] 1
+</code></strong>[(1,1),(2,2)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[] 2
+</code></strong>[]
+</pre></details></div></div><div class="top"><p class="src"><a id="v:bgg2" class="def">bgg2</a> <a href="#v:bgg2" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [(Int, Int)]</td><td class="doc"><p>List of pairs </p></td></tr><tr><td class="src">-&gt; Int</td><td class="doc"><p>The biggest of all the sconde elements of the pairs of the list</p></td></tr></table></div><div class="doc"><p>This function calculates the biggest of all the second elements of a lsit of pairs </p><pre>bgg2  []
+    = error &quot;Invalid List&quot;
+bgg2 [(x,y)]
+    = y 
+bgg2 ((x,y):(z,w):t)
+    | y &gt;= w = bgg2 ((x,y):t) 
+    | otherwise 
+     = bgg2 ((z,w):t) 
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:bgg20">Notes:</h2><details id="ch:bgg20"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list is empty gives back an error &quot;Invalid List&quot;</pre><pre>If the list has only one pair gives back the second element</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:bgg21">Exemples:</h2><details id="ch:bgg21"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[(0,11),(1,20),(2,3)]
+</code></strong>20
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[(0,11)]
+</code></strong>11
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[]
+</code></strong>error &quot;Invalid List&quot;
+</pre></details></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a id="t:Name" class="def">Name</a> = String <a href="#t:Name" class="selflink">#</a></p></div><div class="top"><p class="src"><span class="keyword">type</span> <a id="t:Coordinate" class="def">Coordinate</a> = (Double, Double) <a href="#t:Coordinate" class="selflink">#</a></p></div><div class="top"><p class="src"><span class="keyword">data</span> <a id="t:Movement" class="def">Movement</a> <a href="#t:Movement" class="selflink">#</a></p><div class="doc"><p>Possible movementes </p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a id="v:N" class="def">N</a></td><td class="doc"><p>North </p></td></tr><tr><td class="src"><a id="v:S" class="def">S</a></td><td class="doc"><p>South </p></td></tr><tr><td class="src"><a id="v:E" class="def">E</a></td><td class="doc"><p>East</p></td></tr><tr><td class="src"><a id="v:W" class="def">W</a></td><td class="doc"><p>West </p></td></tr></table></div><div class="subs instances"><h4 class="instances details-toggle-control details-toggle" data-details-id="i:Movement">Instances</h4><details id="i:Movement" open="open"><summary class="hide-when-js-enabled">Instances details</summary><table><tr><td class="src clearfix"><span class="inst-left"><span class="instance details-toggle-control details-toggle" data-details-id="i:id:Movement:Eq:1"></span> Eq <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a></span> <a href="#t:Movement" class="selflink">#</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><details id="i:id:Movement:Eq:1"><summary class="hide-when-js-enabled">Instance details</summary><p>Defined in <a href="Ficha3.html">Ficha3</a></p> <div class="subs methods"><p class="caption">Methods</p><p class="src"><a href="#v:-61--61-">(==)</a> :: <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; Bool</p><p class="src"><a href="#v:-47--61-">(/=)</a> :: <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; Bool</p></div></details></td></tr><tr><td class="src clearfix"><span class="inst-left"><span class="instance details-toggle-control details-toggle" data-details-id="i:id:Movement:Show:2"></span> Show <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a></span> <a href="#t:Movement" class="selflink">#</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><details id="i:id:Movement:Show:2"><summary class="hide-when-js-enabled">Instance details</summary><p>Defined in <a href="Ficha3.html">Ficha3</a></p> <div class="subs methods"><p class="caption">Methods</p><p class="src"><a href="#v:showsPrec">showsPrec</a> :: Int -&gt; <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; ShowS</p><p class="src"><a href="#v:show">show</a> :: <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a> -&gt; String</p><p class="src"><a href="#v:showList">showList</a> :: [<a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a>] -&gt; ShowS</p></div></details></td></tr></table></details></div></div><div class="top"><p class="src"><span class="keyword">type</span> <a id="t:Movements" class="def">Movements</a> = [<a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a>] <a href="#t:Movements" class="selflink">#</a></p></div><div class="top"><p class="src"><span class="keyword">data</span> <a id="t:PositionPersson" class="def">PositionPersson</a> <a href="#t:PositionPersson" class="selflink">#</a></p><div class="doc"><p>Indicates the possicion of someone </p></div><div class="subs constructors"><p class="caption">Constructors</p><table><tr><td class="src"><a id="v:Pos" class="def">Pos</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><div class="subs fields"><p class="caption">Fields</p><ul><li><dfn class="src"><a href="Ficha3.html#t:Name" title="Ficha3">Name</a></dfn><div class="doc"><p>Name of the person </p></div></li><li><dfn class="src"><a href="Ficha3.html#t:Coordinate" title="Ficha3">Coordinate</a></dfn><div class="doc"><p>Coordinates of the person  </p></div></li></ul></div></td></tr></table></div><div class="subs instances"><h4 class="instances details-toggle-control details-toggle" data-details-id="i:PositionPersson">Instances</h4><details id="i:PositionPersson" open="open"><summary class="hide-when-js-enabled">Instances details</summary><table><tr><td class="src clearfix"><span class="inst-left"><span class="instance details-toggle-control details-toggle" data-details-id="i:id:PositionPersson:Eq:1"></span> Eq <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></span> <a href="#t:PositionPersson" class="selflink">#</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><details id="i:id:PositionPersson:Eq:1"><summary class="hide-when-js-enabled">Instance details</summary><p>Defined in <a href="Ficha3.html">Ficha3</a></p> <div class="subs methods"><p class="caption">Methods</p><p class="src"><a href="#v:-61--61-">(==)</a> :: <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; Bool</p><p class="src"><a href="#v:-47--61-">(/=)</a> :: <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; Bool</p></div></details></td></tr><tr><td class="src clearfix"><span class="inst-left"><span class="instance details-toggle-control details-toggle" data-details-id="i:id:PositionPersson:Show:2"></span> Show <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></span> <a href="#t:PositionPersson" class="selflink">#</a></td><td class="doc empty">&nbsp;</td></tr><tr><td colspan="2"><details id="i:id:PositionPersson:Show:2"><summary class="hide-when-js-enabled">Instance details</summary><p>Defined in <a href="Ficha3.html">Ficha3</a></p> <div class="subs methods"><p class="caption">Methods</p><p class="src"><a href="#v:showsPrec">showsPrec</a> :: Int -&gt; <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; ShowS</p><p class="src"><a href="#v:show">show</a> :: <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a> -&gt; String</p><p class="src"><a href="#v:showList">showList</a> :: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>] -&gt; ShowS</p></div></details></td></tr></table></details></div></div><div class="top"><p class="src"><a id="v:positonM" class="def">positonM</a> <a href="#v:positonM" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>List of people and their coordinates  </p></td></tr><tr><td class="src">-&gt; <a href="Ficha3.html#t:Movement" title="Ficha3">Movement</a></td><td class="doc"><p>Direction that they will move</p></td></tr><tr><td class="src">-&gt; [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>New list </p></td></tr></table></div><div class="doc"><p>This function makes the cordinates of evryone in a list move one unite to one direction</p><pre>positonM [] _ 
+        = [] 
+<em>If they move to <strong>North</strong> (Up)</em>            
+positonM ((Pos n (x,y)):t) N 
+        = Pos n (x,y + 1) : positonM t N  
+<em>If they move to <strong>South</strong> (Down)</em>
+positonM ((Pos n (x,y)):t) S 
+        = Pos n (x,y - 1) : positonM t S 
+<em>If they move to <strong>East</strong> (Right)</em> 
+positonM ((Pos n (x,y)):t) E 
+        = Pos n (x + 1,y) : positonM t E 
+<em>If they move to <strong>West</strong> (Left)</em>
+positonM ((Pos n (x,y)):t) W 
+        = Pos n (x - 1,y) : positonM t W  
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:positonM0">Notes:</h2><details id="ch:positonM0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list is empty gives back an empty list</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:positonM1">Exemples:</h2><details id="ch:positonM1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1,1),Pos &quot;Catarina&quot; (2,2)] N
+</code></strong>[Pos &quot;Joao&quot; (1.0,2.0),Pos &quot;Catarina&quot; (2.0,3.0)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1,1),Pos &quot;Catarina&quot; (2,2)] S
+</code></strong>[Pos &quot;Joao&quot; (1.0,0.0),Pos &quot;Catarina&quot; (2.0,1.0)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1,1),Pos &quot;Catarina&quot; (2,2)] E
+</code></strong>[Pos &quot;Joao&quot; (2.0,1.0),Pos &quot;Catarina&quot; (3.0,2.0)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1,1),Pos &quot;Catarina&quot; (2,2)] W
+</code></strong>[Pos &quot;Joao&quot; (0.0,1.0),Pos &quot;Catarina&quot; (1.0,2.0)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[] N
+</code></strong>[]
+</pre></details></div></div><div class="top"><p class="src"><a id="v:multPstn" class="def">multPstn</a> <a href="#v:multPstn" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></td><td class="doc"><p>The person and their coordinates</p></td></tr><tr><td class="src">-&gt; <a href="Ficha3.html#t:Movements" title="Ficha3">Movements</a></td><td class="doc"><p>List of movementes</p></td></tr><tr><td class="src">-&gt; <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></td><td class="doc"><p>The person with the new coodinates </p></td></tr></table></div><div class="doc"><p>This function move a person a certain amount of times in any direction</p><pre>multPstn x [] 
+        = x      
+multPstn (Pos n (x,y)) (h:t) 
+       = multPstn (mov (Pos n (x,y)) h) t    
+<em>Auxiliary function that calculates the movement in the head of the list</em> 
+  where 
+       <em>If it moves <strong>North</strong> (Up)</em>
+        mov (Pos n (x,y)) N 
+           = Pos n (x,y + 1) 
+       <em>If it moves <strong>South</strong> (Down)</em>
+        mov (Pos n (x,y)) S 
+           = Pos n (x,y - 1) 
+       <em>If it moves <strong>East</strong> (Right)</em>
+        mov (Pos n (x,y)) E 
+           = Pos n (x + 1,y) 
+       <em>If it moves <strong>West</strong> (Left)</em>
+        mov (Pos n (x,y)) W 
+           = Pos n (x - 1,y)  
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:multPstn0">Notes:</h2><details id="ch:multPstn0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list of movements is empty gives back the same coordinates</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:multPstn1">Exemples:</h2><details id="ch:multPstn1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>(Pos &quot;Joao&quot; (0,0)) [N,E,E]
+</code></strong>Pos &quot;Joao&quot; (2.0,1.0)
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>(Pos &quot;Joao&quot; (0,0)) [S,S,W]
+</code></strong>Pos &quot;Joao&quot; (-1.0,-2.0) 
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>(Pos &quot;Joao&quot; (0,0)) []
+</code></strong>Pos &quot;Joao&quot; (0,0) 
+</pre></details></div></div><div class="top"><p class="src"><a id="v:multPstnM" class="def">multPstnM</a> <a href="#v:multPstnM" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>List of people and their coordinates </p></td></tr><tr><td class="src">-&gt; <a href="Ficha3.html#t:Movements" title="Ficha3">Movements</a></td><td class="doc"><p>List of movements</p></td></tr><tr><td class="src">-&gt; [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>List of people and their coordinates after moving </p></td></tr></table></div><div class="doc"><p>This function moves a list of people a certain amount of times in any direction </p><pre>multPstnM  [] _ 
+         = [] 
+multPstnM  l []  
+         = l 
+multPstnM (Pos n (x,y):t) (h:t1) 
+         = multPstn (Pos n (x,y)) (h:t1) : multPstnM t (h:t1)
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:multPstnM0">Notes:</h2><details id="ch:multPstnM0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list of people is empty gives back an empty list</pre><pre>If the list of movements is empty gives back the same list of people</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:multPstnM1">Exemples:</h2><details id="ch:multPstnM1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (0,0), Pos &quot;Catarina&quot; (0,0)] [S,S,W]
+</code></strong>[Pos &quot;Joao&quot; (-1.0,-2.0),Pos &quot;Catarina&quot; (-1.0,-2.0)]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[] [S,S,W]
+</code></strong>[]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (0,0), Pos &quot;Catarina&quot; (0,0)] []
+</code></strong>[Pos &quot;Joao&quot; (0,0), Pos &quot;Catarina&quot; (0,0)] 
+</pre></details></div></div><div class="top"><p class="src"><a id="v:personN" class="def">personN</a> <a href="#v:personN" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>List of people and their coordinates  </p></td></tr><tr><td class="src">-&gt; Maybe <a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a></td><td class="doc"><p>The person more to the <strong>north</strong> <em>(Bigger y coordinate)</em> </p></td></tr></table></div><div class="doc"><p>This function indentifies the person positioned more to the north</p><pre>personN [] 
+       = Nothing 
+personN [x] 
+       = Just x 
+personN (Pos n1 (x1,y1): Pos n2 (x2,y2): t) 
+       = Just (north (Pos n1 (x1,y1):Pos n2 (x2,y2):t))    
+  where 
+<em>Auxiliar function that </em>indentifies the person position more to the <strong>north</strong> (Bigger y coordinate)/  
+        north [x] 
+             = x  
+        north (Pos n1 (x1,y1):Pos n2 (x2,y2):t)
+             | y1 &gt;= y2 = north (Pos n1 (x1,y1):t) 
+             | otherwise 
+              = north (Pos n2 (x2,y2):t)
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:personN0">Notes:</h2><details id="ch:personN0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list is empty gives back nothing</pre><pre>If the list has only one element, gives back that same element</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:personN1">Exemples:</h2><details id="ch:personN1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (0,1), Pos &quot;Catarina&quot; (0,2)]
+</code></strong>Just (Pos &quot;Catarina&quot; (0.0,2.0))
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (0,1)]
+</code></strong>Just (Pos &quot;Joao&quot; (0.0,1.0))
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>personN []
+</code></strong>Nothing 
+</pre></details></div></div><div class="top"><p class="src"><a id="v:peopleN" class="def">peopleN</a> <a href="#v:peopleN" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [<a href="Ficha3.html#t:PositionPersson" title="Ficha3">PositionPersson</a>]</td><td class="doc"><p>List of people and their coordinates </p></td></tr><tr><td class="src">-&gt; [<a href="Ficha3.html#t:Name" title="Ficha3">Name</a>]</td><td class="doc"><p>List of names of everyone more to the north </p></td></tr></table></div><div class="doc"><p>This functions gives the list of names of everyone that is more to the north </p><pre>peopleN  []
+       = []  
+peopleN (Pos n (x,y):t) 
+       = listN (Pos n (x,y):t) maxY 
+  where 
+<em>Auxiliar function that tranformas the type of the result the function maxN into a Double</em>
+        maxY = maxN (Pos n (x,y):t) 
+        --
+<em>Auxiliar function that calculates the coordinates of the person more to the <strong>north</strong> (Bigger y coordinate)</em>        
+        maxN :: 
+            [PositionPersson] (List of people and their coordinates) 
+         -&gt; Double            (Coordinates of the people more to the south)
+        maxN [Pos n (x,y)]
+            = y
+        maxN (Pos n1 (x1,y1):Pos n2 (x2,y2):t)         
+            | y1 &gt;= y2 = maxN (Pos n1 (x1,y1):t) 
+            | otherwise 
+             = maxN (Pos n2 (x2,y2):t) 
+        --
+<em>Auxiliar function that makes the list of names of everyone in a certain coordinate</em>  
+        listN :: 
+            [PositionPersson] (List of people and their coordinates) 
+         -&gt; Double            (Coordinates of the people more to the south)
+         -&gt; [Name]            (List of names of everyone more to the north) 
+        listN  [] c 
+             = []   
+        listN (Pos n (x,y):t) c 
+             | y == c = n : listN t c 
+             | otherwise 
+              = listN t c
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:peopleN0">Notes:</h2><details id="ch:peopleN0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list of people is empty than it gives back an empty list</pre><pre>If thres only one element than it gives back an list with that persons name</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:peopleN1">Exemples:</h2><details id="ch:peopleN1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1.0, 5.0), Pos &quot;Catarina&quot; (2.0, 10.0),Pos &quot;Carvalhosa&quot; (4.0, 10.0)]
+</code></strong>[&quot;Catarina&quot;,&quot;Carvalhosa&quot;]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[Pos &quot;Joao&quot; (1.0, 5.0)]
+</code></strong>[&quot;Joao&quot;]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[]
+</code></strong>[] 
+</pre></details></div></div><div class="top"><p class="src"><a id="v:ntoRight" class="def">ntoRight</a> <a href="#v:ntoRight" class="selflink">#</a></p><div class="subs arguments"><p class="caption">Arguments</p><table><tr><td class="src">:: [a]</td><td class="doc"><p>List </p></td></tr><tr><td class="src">-&gt; Int</td><td class="doc"><p>How many times the elements move to the right </p></td></tr><tr><td class="src">-&gt; [a]</td><td class="doc"><p>List after the elements moved </p></td></tr></table></div><div class="doc"><p>This function moves all elementes of a list a certain number of times to the right </p><pre>ntoRight  l 0 
+        = l 
+ntoRight  [] _
+        = [] 
+ntoRight (h:t) n 
+        = ntoRight (last t : h : init t) (n - 1)
+</pre><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:ntoRight0">Notes:</h2><details id="ch:ntoRight0"><summary class="hide-when-js-enabled">Expand</summary><pre>If the list is empty gives back an empty list</pre><pre>If the number gib&#171;ven is 0 gives back the same list</pre><pre>The elements in the end of the list move to the begning</pre></details><h2 class="caption details-toggle-control details-toggle" data-details-id="ch:ntoRight1">Exemples:</h2><details id="ch:ntoRight1"><summary class="hide-when-js-enabled">Expand</summary><pre class="screen"><code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[1,2,3,4,5] 2
+</code></strong>[4,5,1,2,3]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[1,2,3,4,5] 0
+</code></strong>[1,2,3,4,5]
+<code class="prompt">&gt;&gt;&gt; </code><strong class="userinput"><code>[] 1
+</code></strong>[]
+</pre></details></div></div></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.23.0</p></div></body></html>
