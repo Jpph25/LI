@@ -9,7 +9,9 @@ Portability : POSIX
 
 Este módulo contém definições Haskell para o cálculo de funções recursivas simples (obs: isto é apenas uma descrição mais longa do módulo para efeitos de documentação.)
 -}
+
 module Exemplo where
+
 {-| A função ’fact’ calcula o factorial (@fact n@ retorna o factorial de um inteiro @n@).
 
 Alternativamente a função poderia ser definida da seguinte forma:

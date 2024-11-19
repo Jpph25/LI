@@ -119,7 +119,7 @@ type Name = String
 type Coordinate = (Double, Double)
 
 -- | Possible movementes 
-data Movement = N -- ^ North 
+data Movement =  N -- ^ North 
                | S -- ^ South 
                | E -- ^ East
                | W -- ^ West 
